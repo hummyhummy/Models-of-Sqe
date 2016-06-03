@@ -32,6 +32,9 @@ if ~isempty(probName)
         if strcmp(probName,'DBM')
             [~, p] = DBM(seqInRATotal, 0.8, 1, 1, 0.01);
         end
+        if strcmp(probName,'delta_one')
+            [~, p] = deltaRule(seqInRATotal,0.1);
+        end
         [previousS,currentS,~] = RA2AB(seqInRATotal,1);
         RT = [];
         RT = DDM(z,m,S,previousS,currentS,p);
