@@ -11,9 +11,9 @@ if ~isempty(probName)
     % paras control figure
     
     %y-axis scale
-    y_low = 0;%0.53;
-    y_up = 1;%0.63;
-    y_step = 0.05;
+    y_low = 0.2;%0.53;
+    y_up = 0.7;%0.63;
+    y_step = 0.1;
     % x1_stick adjust
     x1_adjust = -0.05;
     y1_adjust = -0.05;
@@ -25,6 +25,7 @@ if ~isempty(probName)
     for i = 1:length(prob)
         seqInRATotal = [];
         seqInRATotal = binornd(1,prob(i),subNum,trialNum);
+        [previousS,currentS,seqIn12Total] = RA2AB(seqInRATotal,1);
         p = [];
         if strcmp(probName,'FBM')
             [~, p] = FBM(seqInRATotal,1,1);
@@ -35,11 +36,20 @@ if ~isempty(probName)
         if strcmp(probName,'delta_one')
             [~, p] = deltaRule(seqInRATotal,0.1);
         end
-        [previousS,currentS,~] = RA2AB(seqInRATotal,1);
+        if strcmp(probName,'jointModel')
+            out = joint([260,24.85,0.19,80.46,0.099], currentS, [0,0,0,0,0,ones(1,trialNum-5)], 1);
+            out = out/1000; % ms to s
+        end
+        
         RT = [];
-        RT = DDM(z,m,S,previousS,currentS,p);
-        [~,meamTime,~] = getStasInNSeq(seqInRATotal,RT);
-        errorbar(1:1:16,mean(meamTime),std(meamTime)/sqrt(subNum),colorCode{i});hold on;
+        if ~isempty(p)
+            RT = DDM(z,m,S,previousS,currentS,p);
+            [~,meamTime,~] = getStasInNSeq(seqInRATotal,RT);
+            errorbar(1:1:16,mean(meamTime),std(meamTime)/sqrt(subNum),colorCode{i});hold on;
+        else
+            RT = out;
+            plot(1:1:16,RT,colorCode{i});hold on;
+        end
     end
     
     %%  draw information
