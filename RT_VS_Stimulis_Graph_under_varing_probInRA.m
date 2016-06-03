@@ -11,15 +11,15 @@ if ~isempty(probName)
     % paras control figure
     
     %y-axis scale
-    y_low = 0.2;%0.53;
-    y_up = 0.7;%0.63;
-    y_step = 0.1;
+    y_low = 0;%0.53;
+    y_up = 1;%0.63;
+    y_step = 0.5;
     % x1_stick adjust
     x1_adjust = -0.05;
-    y1_adjust = -0.05;
+    y1_adjust = -0.04;
     % x2_stick adjust
     x2_adjust = -0.2;
-    y2_adjust = 0.05;
+    y2_adjust = 0.04;
 %%     
     figure;
     for i = 1:length(prob)
@@ -34,7 +34,10 @@ if ~isempty(probName)
             [~, p] = DBM(seqInRATotal, 0.8, 1, 1, 0.01);
         end
         if strcmp(probName,'delta_one')
-            [~, p] = deltaRule(seqInRATotal,0.1);
+            [~, p] = deltaRuleOne(seqInRATotal,0.1);
+        end
+        if strcmp(probName,'delta_two')
+             [~, p] = deltaRuleTwo(seqInRATotal,0.3,0.2);
         end
         if strcmp(probName,'jointModel')
             out = joint([260,24.85,0.19,80.46,0.099], currentS, [0,0,0,0,0,ones(1,trialNum-5)], 1);
