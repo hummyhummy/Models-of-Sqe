@@ -20,7 +20,7 @@ if ~isempty(probName)
     % x2_stick adjust
     x2_adjust = -0.2;
     y2_adjust = 0.05;
-    
+%%     
     figure;
     for i = 1:length(prob)
         seqInRATotal = [];
@@ -28,6 +28,9 @@ if ~isempty(probName)
         p = [];
         if strcmp(probName,'FBM')
             [~, p] = FBM(seqInRATotal,1,1);
+        end
+        if strcmp(probName,'DBM')
+            [~, p] = DBM(seqInRATotal, 0.8, 1, 1, 0.01);
         end
         [previousS,currentS,~] = RA2AB(seqInRATotal,1);
         RT = [];
