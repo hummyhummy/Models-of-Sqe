@@ -1,0 +1,5 @@
+This repository collects model of sequential effect.
+- FBM & DBM is implemented according to paper Zhang, S., Huang, H., & Yu, A. J. (2014). Sequential effects: A Bayesian analysis of prior bias on reaction time and behavioral choice.. Cognitive Science,.
+- joint.m (joint learning model) and dataset(E1data.txt E2data.txt) is the supplementary of paper Jones, M., Curran, T., Mozer, M. C., & Wilder, M. (2013). Sequential effects in response time reveal learning mechanisms and event representations.. Psychological Review, 120(3).
+- in DDM.m decision time is calculated based on paper Bogacz, R., Brown, E. R., Moehlis, J., Holmes, P., & Cohen, J. D. (2006). The Physics of Optimal Decision Making: A Formal Analysis of Models of Performance in Two-Alternative Forced-Choice Tasks.. Psychological Review, 113(4). 
+ - RT_VS_Stimulis_Graph_under_varing_probInRA.m demonstrates sequential effect as RT v.s. previous stimulus graph
